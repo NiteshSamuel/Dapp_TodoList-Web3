@@ -50,6 +50,8 @@ const connectWallet = async() =>{
         setcurrentAccount(account[0]);
     
 }
+
+
 const todoListContract =async() =>{
     try{
         const webmodal= new Web3modal();
@@ -61,9 +63,16 @@ const todoListContract =async() =>{
         const bal =await contract.getBalance();
         const ad = await contract.getOwner();
         setbalance(bal);
-        setcurrentAccount(ad);
-        
+       // setcurrentAccount(ad);
 
+    //    ad.map(async(el)=>{
+    //     const getSingleData =await contract.getTodoList(el);
+    //     myList.push(getSingleData);
+    //     console.log(getSingleData);
+    //    })
+
+        const allMessage= await contract.getTodoList(ad);
+        setmyList(allMessage);
 
     }catch(e){
         console.log(e);
@@ -71,8 +80,45 @@ const todoListContract =async() =>{
     }
 };
 
+const onCompleteList = async (address) =>{
+    try {
+        const webmodal= new Web3modal();
+        const connect =await webmodal.connect();
+        const provider=new ethers.BrowserProvider(connect);
+        
+        const signer = await provider.getSigner();
+        const contract= await fetchContract(signer);
+
+        const state =await contract.toggleList(address);
+        state.wait();
+
+        //console.log(state);
+
+    }catch(e){
+        console.log("something went wrong when togggling the list see the logs:::"+e);
+    }
+}
+
+const createTodoList = async(message)=>{
+try{
+    const webmodal= new Web3modal();
+        const connect =await webmodal.connect();
+        const provider=new ethers.BrowserProvider(connect);
+        
+        const signer = await provider.getSigner();
+        const contract= await fetchContract(signer);
+
+
+        const value= await contract.createTodoList(message);
+        value.wait();
+        console.log(message);
+
+}catch(e){
+console.log("while creating new list something went wrong ! see logs::: "+e);
+}
+}
+
 useEffect(()=>{
-   console.log(fetchContract);
     checkIfWalletIsConnected();
     connectWallet();
     todoListContract();
@@ -81,7 +127,7 @@ useEffect(()=>{
 
 
   return (
-    <TodoListContext.Provider value = {{todoListContract, connectWallet, checkIfWalletIsConnected, balance, currentAccount}}>
+    <TodoListContext.Provider value = {{todoListContract, connectWallet, checkIfWalletIsConnected, balance, currentAccount, myList, createTodoList, onCompleteList}}>
         {children}
 
     </TodoListContext.Provider>
