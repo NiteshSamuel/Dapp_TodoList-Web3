@@ -7,7 +7,7 @@ import Web3modal from "web3modal";
 // Import the interal packages
 import {todoListAddress, todoABI} from "./costant";
 
-const fetchContract = (signOrProvider)=> new ethers.Contract(todoListAddress,todoABI,signOrProvider);
+const fetchContract = async(signOrProvider)=> new ethers.Contract(todoListAddress,todoABI,signOrProvider);
 
 
 
@@ -61,8 +61,9 @@ const todoListContract =async() =>{
         const signer = await provider.getSigner();
         const contract= await fetchContract(signer);
         const bal =await contract.getBalance();
+        const formattedBalance= ethers.formatEther(bal);
         const ad = await contract.getOwner();
-        setbalance(bal);
+        setbalance(formattedBalance);
        // setcurrentAccount(ad);
 
     //    ad.map(async(el)=>{
@@ -71,7 +72,8 @@ const todoListContract =async() =>{
     //     console.log(getSingleData);
     //    })
 
-        const allMessage= await contract.getTodoList(ad);
+        const allMessage= await contract.getTodoList(ad).then(m=>{ return m;});
+        console.log("this the response from the list: "+allMessage);
         setmyList(allMessage);
 
     }catch(e){
@@ -111,7 +113,6 @@ try{
 
         const value= await contract.createTodoList(message);
         value.wait();
-        console.log(message);
 
 }catch(e){
 console.log("while creating new list something went wrong ! see logs::: "+e);

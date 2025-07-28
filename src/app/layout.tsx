@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+// Add this at the top of your main file
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 //internal import
 import { TodoList } from "../../context/TodoList";

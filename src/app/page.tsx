@@ -5,12 +5,15 @@ import { ethers } from "ethers";
 import TodolistCreate from "./TodolistCreate";
 
 
+
 //internal import
 import {TodoListContext} from "../../context/TodoList";
+import './todollisthome.css';
 
 import { useContext } from "react";
 import { AppProps } from "next/app";
 import { Meera_Inimai } from "next/font/google";
+import { Button } from "react-bootstrap";
 
 export default function App({Component, pageProps}: AppProps){
 
@@ -18,21 +21,16 @@ export default function App({Component, pageProps}: AppProps){
 
   const [message, setMassage]= useState("");
   return (<>
-  <div>
+  <div className="wholePage">
+   <div className="ButonContainer">
     {
-      !currentAccount? (<button onClick={()=>{}}>connect Wallent</button>) :(<button onClick={()=>{connectWallet()}}>{currentAccount.slice(0,30)}..</button>)
+      !currentAccount? (<Button variant="primary" onClick={()=>{}}>connect Wallent</Button>
+      ) :(<><Button variant="success" onClick={()=>{connectWallet()}}>{currentAccount.slice(0,30)}..</Button>
+      <div className="balanceContainer">Blance: {balance} </div>
+      </>)
     }
   </div>
-  <div className="Home_box">
-    <div className="Home_list">
-      <h2>Complete Todo List</h2>
-      <div>
-        {/* {myList.map((el:any, i:any)=>{
-          <div className="ItemList"><p>{el}</p></div>
-        })} */}
-      </div>
-    </div>
-  </div>
+  <div className="todoListContainer">
       <h2 className="TodoHeader">Create Blockchain Todo List</h2>
       <div>
       <input type='Text' className= "InputText"placeholder='Enter your To Do!' onChange={(e)=>{
@@ -42,7 +40,9 @@ export default function App({Component, pageProps}: AppProps){
         currentAccount ? (<button onClick={()=>{createTodoList(message)}}>Create To DO!</button>) : (<button onClick={()=>{connectWallet()}}>connect wallet</button>)
 }
 </div>
-{console.log(message)}
+
  <TodolistCreate myList={myList}/>
+ </div>
+ </div>
   </>);
 }
