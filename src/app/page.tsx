@@ -26,12 +26,12 @@ export default function App({Component, pageProps}: AppProps){
     {
       !currentAccount? (<Button variant="primary" onClick={()=>{}}>connect Wallent</Button>
       ) :(<><Button variant="success" onClick={()=>{connectWallet()}}>{currentAccount.slice(0,30)}..</Button>
-      <div className="balanceContainer">Blance: {balance} </div>
+      <div className="balanceContainer">Balance: {String(balance).slice(0,10)}... ETH </div>
       </>)
     }
   </div>
   <div className="todoListContainer">
-      <h2 className="TodoHeader">Create Blockchain Todo List</h2>
+      <h2 className="TodoHeader">DApp: Create BlockChain Todo List!</h2>
       <div>
       <input type='Text' className= "InputText"placeholder='Enter your To Do!' onChange={(e)=>{
         setMassage(e.target.value)

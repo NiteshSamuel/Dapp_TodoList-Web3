@@ -96,7 +96,10 @@ body{
     border-radius: 5px;
     align-items: center;
     width: 100%;
+    opacity: 1;
 }
+
+
 
 .strikethrough{
     padding: 10px;

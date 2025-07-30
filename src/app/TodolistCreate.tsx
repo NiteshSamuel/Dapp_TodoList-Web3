@@ -5,6 +5,7 @@ import './todollisthome.css';
 import { Card } from 'react-bootstrap';
 import { ListGroup } from 'react-bootstrap';
 import DoneIcon from '@mui/icons-material/Done';
+import { boolean } from 'hardhat/internal/core/params/argumentTypes';
 
 
 
@@ -17,7 +18,7 @@ const TodolistCreate = ({myList}:any) => {
         <ListGroup className="ItemList">
           {
             myList.map((el:any,i:any)=>(
-              <ListGroup.Item className={el[2] ? 'strikethrough':'item'} key={i+1}>
+              <ListGroup.Item className={el[2] ? 'strikethrough':'item'} action  variant="dark" key={i+1}>
                 <p className="itemValue">{el[1]}</p>
                 {el[2]===false ? (
                 <DoneIcon className="doneIcon" onClick={()=>{onCompleteList(el[0],i);
