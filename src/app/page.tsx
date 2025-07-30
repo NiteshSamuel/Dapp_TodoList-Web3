@@ -37,7 +37,7 @@ export default function App({Component, pageProps}: AppProps){
         setMassage(e.target.value)
       }}  />
       {
-        currentAccount ? (<button onClick={()=>{createTodoList(message)}}>Create To DO!</button>) : (<button onClick={()=>{connectWallet()}}>connect wallet</button>)
+        currentAccount ? (<Button variant="success" onClick={()=>{createTodoList(message)}}>Create To DO!</Button>) : (<Button variant="primary" onClick={()=>{connectWallet()}}>connect wallet</Button>)
 }
 </div>
 

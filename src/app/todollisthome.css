@@ -5,7 +5,9 @@ body{
     background-color: rgb(40, 40, 40);
     color: rgba(240, 234, 234, 0.607);
     font-family: 'Geist', sans-serif;
-
+    display: flex;
+    align-items: center ;
+    justify-content: center;
 }
 #root{
     display: flex;
@@ -17,12 +19,14 @@ body{
 
 
 .wholePage{
-    display: center;
+    align-self: center;
+    display:block;
     border:solid 5px black;
     border-radius: 10px;
     padding: 10px;
     margin:10px;
     height: auto;
+    width:700px;
     align-items: center;
     text-align: center;
     justify-content: center;
@@ -43,8 +47,84 @@ body{
 
 }
 
-.wholePage .toddListContainer{
-    margin:200px;
-    padding: 200px;
-    border:solid 5px black;
+.todoListContainer{
+    padding-top: 100px;
+    text-align: center;
+    margin: 10px;
+}
+
+.TodoHeader{
+    font-size: 30px;
+    font-weight: bold;
+    color: beige;
+
+}
+.InputText{
+    padding:10px;
+    margin:10px;
+    border-radius: 10px;
+    background-color: rgb(175, 174, 174);
+    height: inherit;
+    width: 300px;
+    
+}
+.ItemContainer{
+    display:block;
+    flex-direction:column;
+    align-items: center;
+    border: solid 2px black;
+    border-radius: 10px;
+    padding: 10px;
+    width:auto;
+    height: auto;
+
+}
+.ItemList{
+    display: flex;
+    padding: 10px;
+    margin: 20px;
+    flex-direction: column;
+    width:auto;
+    height: auto;
+}
+.item{
+    padding: 10px;
+    margin: 10px;
+    background-color: rgb(65, 63, 63);  
+    display: flex;
+    justify-content: space-between;
+    border-radius: 5px;
+    align-items: center;
+    width: 100%;
+}
+
+.strikethrough{
+    padding: 10px;
+    margin: 10px;
+    background-color: rgb(65, 63, 63);  
+    display: flex;
+    justify-content: space-between;
+    border-radius: 5px;
+    align-items: center;
+    width: 100%;
+    text-decoration: line-through;
+}
+.itemValue{
+    font-size: 20px;
+    font-weight: bold;
+    color: beige;
+    align-items: center;
+}
+.doneIcon{
+    color: rgb(12, 232, 12);
+    cursor: pointer;
+    font-size: 40px;
+    align-items: center;
+}
+.listItemDone{
+    font-size: 20px;
+    font-weight: bold;
+    color: rgb(7, 160, 231);
+    align-items: center;
+    display: flex;
 }

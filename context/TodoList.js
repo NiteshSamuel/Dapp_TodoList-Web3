@@ -28,6 +28,7 @@ export const TodoList = ({children}) => {
 
 
 
+
 const checkIfWalletIsConnected =async() =>{
     if(!window.ethereum) return seterror("Please install metamask!");
     
@@ -35,7 +36,7 @@ const checkIfWalletIsConnected =async() =>{
 
     if(account.length){
         setcurrentAccount(account[0]);
-        console.log(account[0]);
+        //console.log(account[0]);
     }else{
         seterror("please install metamask and reload the account if it's not working ");
     }
@@ -73,7 +74,7 @@ const todoListContract =async() =>{
     //    })
 
         const allMessage= await contract.getTodoList(ad).then(m=>{ return m;});
-        console.log("this the response from the list: "+allMessage);
+        //console.log("this the response from the list: "+allMessage);
         setmyList(allMessage);
 
     }catch(e){
@@ -82,7 +83,7 @@ const todoListContract =async() =>{
     }
 };
 
-const onCompleteList = async (address) =>{
+const onCompleteList = async (address,id) =>{
     try {
         const webmodal= new Web3modal();
         const connect =await webmodal.connect();
@@ -91,8 +92,8 @@ const onCompleteList = async (address) =>{
         const signer = await provider.getSigner();
         const contract= await fetchContract(signer);
 
-        const state =await contract.toggleList(address);
-        state.wait();
+        const s =await contract.toggleList(address,id);
+        s.wait();
 
         //console.log(state);
 
@@ -123,7 +124,7 @@ useEffect(()=>{
     checkIfWalletIsConnected();
     connectWallet();
     todoListContract();
-})
+},[onCompleteList]);
 
 
 

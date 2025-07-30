@@ -1,23 +1,33 @@
 import React, { Key, useContext } from 'react'
 import { TodoListContext } from '../../context/TodoList'
 import { Indexed } from 'ethers';
+import './todollisthome.css';
+import { Card } from 'react-bootstrap';
+import { ListGroup } from 'react-bootstrap';
+import DoneIcon from '@mui/icons-material/Done';
 
 
 
 const TodolistCreate = ({myList}:any) => {
-console.log(myList);
+  const {onCompleteList}:any =useContext(TodoListContext);
+//console.log(myList);
   return (
-    <div>
-      {myList.length ===0 ? (<div>No Data </div>) :(
-        <div >
+    <div className="ItemContainer">
+      {myList.length ===0 ? (<div className="NoItem">No Data </div>) :(
+        <ListGroup className="ItemList">
           {
             myList.map((el:any,i:any)=>(
-              <div key={i+1}>
-                <p>{el[1]}</p>
-              </div>
+              <ListGroup.Item className={el[2] ? 'strikethrough':'item'} key={i+1}>
+                <p className="itemValue">{el[1]}</p>
+                {el[2]===false ? (
+                <DoneIcon className="doneIcon" onClick={()=>{onCompleteList(el[0],i);
+                  console.log("this is the id of the item: "+el[0]);
+                }}/>) :(<p className="listItemDone">DOWN</p>)
+                }
+              </ListGroup.Item>
             ))
           }
-          </div>
+          </ListGroup>
       )
 
       }
