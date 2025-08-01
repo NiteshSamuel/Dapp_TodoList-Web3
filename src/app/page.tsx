@@ -24,7 +24,7 @@ export default function App({Component, pageProps}: AppProps){
   <div className="wholePage">
    <div className="ButonContainer">
     {
-      !currentAccount? (<Button variant="primary" onClick={()=>{}}>connect Wallent</Button>
+      !currentAccount? (<Button variant="primary" onClick={()=>{connectWallet()}}>connect Wallent</Button>
       ) :(<><Button variant="success" onClick={()=>{connectWallet()}}>{currentAccount.slice(0,30)}..</Button>
       <div className="balanceContainer">Balance: {String(balance).slice(0,10)}... ETH </div>
       </>)

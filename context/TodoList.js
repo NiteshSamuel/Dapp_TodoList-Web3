@@ -49,6 +49,7 @@ const connectWallet = async() =>{
     
     const account = await window.ethereum.request({method: 'eth_accounts'});
         setcurrentAccount(account[0]);
+        console.log("this is the current account: "+account[0]);
     
 }
 
@@ -65,6 +66,9 @@ const todoListContract =async() =>{
         const formattedBalance= ethers.formatEther(bal);
         const ad = await contract.getOwner();
         setbalance(formattedBalance);
+
+        const account = await window.ethereum.request({method: 'eth_accounts'});
+
        // setcurrentAccount(ad);
 
     //    ad.map(async(el)=>{
@@ -72,9 +76,9 @@ const todoListContract =async() =>{
     //     myList.push(getSingleData);
     //     console.log(getSingleData);
     //    })
-
-        const allMessage= await contract.getTodoList(ad).then(m=>{ return m;});
-        //console.log("this the response from the list: "+allMessage);
+    console.log("this is the address of the owner: "+account[0]);
+        const allMessage= await contract.getTodoList(account[0]).then(m=>{ return m;});
+        console.log("this the response from the list: "+allMessage);
         setmyList(allMessage);
 
     }catch(e){

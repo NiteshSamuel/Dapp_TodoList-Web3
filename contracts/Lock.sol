@@ -37,7 +37,7 @@ contract TodoList{
     }
 
     function  getOwner() public view returns  (address){ 
-        return owner;
+        return msg.sender;
     }
 
     function toggleList(address author,uint256 _id) external {
